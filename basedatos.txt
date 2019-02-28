@@ -1,0 +1,53 @@
+create table proyecto(
+id_proy int not null, 
+nombre varchar(100) not null,
+id_cliente int not null,
+id_colaborador int not null,
+fecha_in date,
+fecha_fin date,
+horas int,
+contacto_cliente varchar(60),
+PRIMARY KEY(id_proy),
+FOREIGN KEY (id_cliente) REFERENCES cliente (id_cliente),
+FOREIGN KEY (id_colaborador) REFERENCES colaboradores (id_colaborador)
+)
+
+create table colaborador(
+id_colaborador int not null AUTO_INCREMENT,
+nombre varchar(20),
+apellido varchar(20),
+PRIMARY KEY(id_colaborador)
+)
+
+create table cliente(
+id_cliente int not null AUTO_INCREMENT,
+nombre_cliente varchar(60),
+direccion varchar(60),
+contacto varchar(60),
+PRIMARY KEY(id_cliente)
+)
+
+create table reporhoras(
+id_horas int not null AUTO_INCREMENT,
+id_consultor int not null,
+id_cliente int not null, 
+id_proy int not null, 
+id_sub int not null,
+actividad varchar(800) not null,
+rol varchar(800) not null,
+horas int not null,
+fecha date not null,  
+estatus varchar(20),
+PRIMARY KEY(id_horas),
+FOREIGN KEY(id_consultor) REFERENCES consultor (id_consultor),
+FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente),
+FOREIGN KEY (id_proy) REFERENCES proyecto (id_proy),
+FOREIGN KEY (id_sub) REFERENCES sub_proyecto (id_sub)
+    )
+
+create TABLE sub_proyecto(
+    id_sub int not null AUTO_INCREMENT, 
+    sub_proyecto varchar(60) not null,
+    id_proy int not null,
+    PRIMARY KEY(id_sub),
+    FOREIGN KEY (id_proy) REFERENCES proyecto (id_proy))
